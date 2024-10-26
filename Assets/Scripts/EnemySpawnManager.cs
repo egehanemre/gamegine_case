@@ -12,6 +12,9 @@ public class EnemySpawnManager : MonoBehaviour
     public float spawnInterval = 2.0f;
     public float spawnIntervalRandomness = 0.5f;
 
+    [SerializeField] public float yOffsetRandomnessStart;
+    [SerializeField] public float yOffsetRandomnessEnd;
+    
     private float nextSpawnTime;
 
     private void Start()
@@ -35,7 +38,7 @@ public class EnemySpawnManager : MonoBehaviour
 
         Vector2 spawnPosition = spawnPoints[spawnPointIndex].transform.position;
         
-        float yOffset = Random.Range(0.05f, 0.45f);;
+        float yOffset = Random.Range(yOffsetRandomnessStart, yOffsetRandomnessEnd);;
         spawnPosition.y += yOffset;
 
         GameObject enemy = Instantiate(enemyPrefabs[enemyIndex], spawnPosition, Quaternion.identity);
