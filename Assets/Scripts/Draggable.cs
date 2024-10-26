@@ -5,32 +5,38 @@ using UnityEngine;
 
 public class Draggable : MonoBehaviour
 {
-    private bool isDragging = false;
+    public static bool isDragging = false;
+    public float slowTimeScale = 0.1f;
 
     private void OnEnable()
     {
-        isDragging = true;
+        StartDragging();
     }
 
     private void OnMouseDown()
     {
-        isDragging = true;
+        StartDragging();
     }
 
     private void OnMouseUp()
     {
-        isDragging = false;
+        StopDragging();
+    }
+
+    private void OnDestroy()
+    {
+        StopDragging();
     }
 
     private void Update()
     {
         if (isDragging)
         {
-            //cancel drag
+            // Cancel drag
             if (Input.GetMouseButtonDown(1)) // Right-click
             {
                 Destroy(gameObject);
-                isDragging = false;
+                StopDragging();
                 return;
             }
 
@@ -38,5 +44,17 @@ public class Draggable : MonoBehaviour
             mousePosition.z = 0; // Ensure the z position is 0
             transform.position = mousePosition;
         }
+    }
+
+    private void StartDragging()
+    {
+        isDragging = true;
+        Time.timeScale = slowTimeScale;
+    }
+
+    private void StopDragging()
+    {
+        isDragging = false;
+        Time.timeScale = 1.0f;
     }
 }
