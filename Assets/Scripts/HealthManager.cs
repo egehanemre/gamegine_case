@@ -25,6 +25,7 @@ public class HealthManager : MonoBehaviour
         UpdateHealthBar();
     }
 
+    /*
     public void Heal(int healAmount)
     {
         health += healAmount;
@@ -34,6 +35,7 @@ public class HealthManager : MonoBehaviour
         }
         UpdateHealthBar();
     }
+    */
 
     private void UpdateHealthBar()
     {

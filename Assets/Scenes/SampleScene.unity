@@ -1230,7 +1230,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &853444160
 Transform:
   m_ObjectHideFlags: 0
@@ -1318,6 +1318,7 @@ MonoBehaviour:
   allyPrefab: {fileID: 7132428441896658710, guid: ac5bd4aff22e68d49831ed5cc70104cf, type: 3}
   price: 200
   priceText: {fileID: 1228029080}
+  tiles: {fileID: 853444159}
 --- !u!1 &1033497919
 GameObject:
   m_ObjectHideFlags: 0
@@ -2179,6 +2180,7 @@ MonoBehaviour:
   allyPrefab: {fileID: 8222477445295442137, guid: 70004139b01736748b4f145821e8ac17, type: 3}
   price: 100
   priceText: {fileID: 91033141}
+  tiles: {fileID: 853444159}
 --- !u!1 &1459458100
 GameObject:
   m_ObjectHideFlags: 0
@@ -2805,6 +2807,7 @@ MonoBehaviour:
   allyPrefab: {fileID: 4564988293686497744, guid: 894340b62198b104185bf2eb29c7a19a, type: 3}
   price: 50
   priceText: {fileID: 1747869630}
+  tiles: {fileID: 853444159}
 --- !u!1 &1736263167
 GameObject:
   m_ObjectHideFlags: 0
