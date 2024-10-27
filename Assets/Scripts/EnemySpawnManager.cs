@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -15,19 +12,19 @@ public class EnemySpawnManager : MonoBehaviour
     [SerializeField] public float yOffsetRandomnessStart;
     [SerializeField] public float yOffsetRandomnessEnd;
     
-    private float nextSpawnTime;
+    private float _nextSpawnTime;
 
     private void Start()
     {
-        nextSpawnTime = Time.time + spawnInterval;
+        _nextSpawnTime = Time.time + spawnInterval;
     }
 
     private void Update()
     {
-        if (Time.time >= nextSpawnTime)
+        if (Time.time >= _nextSpawnTime)
         {
             SpawnEnemies();
-            nextSpawnTime = Time.time + Random.Range(spawnInterval - spawnIntervalRandomness, spawnInterval + spawnIntervalRandomness);
+            _nextSpawnTime = Time.time + Random.Range(spawnInterval - spawnIntervalRandomness, spawnInterval + spawnIntervalRandomness);
         }
     }
 

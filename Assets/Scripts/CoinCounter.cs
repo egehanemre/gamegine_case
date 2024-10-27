@@ -1,22 +1,19 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
 public class CoinCounter : MonoBehaviour
 {
-    public static CoinCounter instance;
+    public static CoinCounter Instance;
     
     public TMP_Text coinText;
-    public int coinCount = 0;
+    public int coinCount;
 
     private void Awake()
     {
-        instance = this;
+        Instance = this;
     }
     
-    void Start()
+    private void Start()
     {
         coinText.text = coinCount.ToString();
     }

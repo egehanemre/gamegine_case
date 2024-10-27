@@ -1,60 +1,102 @@
-// Draggable.cs
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Draggable : MonoBehaviour
 {
-    public static bool isDragging = false;
+    // Static variable to track if any object is currently being dragged
+    private static bool _isDragging;
+
+    // Public variables to control dragging behavior
+    public bool isDraggable = true;
+    public GameObject allyObject;
     public float slowTimeScale = 0.1f;
+    
+    private Camera _mainCamera;
+
+    private void Start()
+    {
+        _mainCamera = Camera.main;
+    }
 
     private void OnEnable()
     {
-        StartDragging();
+        if (isDraggable)
+        {
+            StartDragging();
+        }
     }
-
     private void OnMouseDown()
     {
-        StartDragging();
+        if (!_isDragging && isDraggable)
+        {
+            StartDragging();
+        }
     }
-
     private void OnMouseUp()
     {
-        StopDragging();
+        if (_isDragging)
+        {
+            StopDragging();
+        }
     }
-
     private void OnDestroy()
     {
         StopDragging();
     }
-
     private void Update()
     {
-        if (isDragging)
+        if (_isDragging)
         {
-            // Cancel drag
-            if (Input.GetMouseButtonDown(1)) // Right-click
+            // Cancel drag on right-click
+            if (Input.GetMouseButtonDown(1)) 
             {
                 Destroy(gameObject);
                 StopDragging();
                 return;
             }
 
-            Vector3 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            mousePosition.z = 0; // Ensure the z position is 0
+            // Update object position to follow the mouse
+            Vector2 mousePosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
             transform.position = mousePosition;
+
+            // Place object on left-click
+            if (Input.GetMouseButtonDown(0))
+            {
+                PlaceObject();
+            }
         }
     }
 
+    // Method to place the object on a tile
+    private void PlaceObject()
+    {
+        Collider2D hitCollider = Physics2D.OverlapPoint(transform.position);
+        if (hitCollider != null)
+        {
+            Tile tile = hitCollider.GetComponent<Tile>();
+            if (tile != null && !tile.hasAlly)
+            {
+                tile.hasAlly = true;
+                tile.spriteRenderer.sprite = null; // Remove the sprite from the tile
+                tile.allyObject = gameObject; // Set the ally object reference on the tile
+                
+                gameObject.transform.position = tile.transform.position; // Snap the draggable object to the tile
+                Destroy(gameObject.GetComponent<Draggable>()); // Remove the draggable component
+                
+                //TODO Manage money mechanics
+                
+                return;
+            }
+        }
+        Destroy(gameObject); // Destroy if not placed on a valid tile
+    }
     private void StartDragging()
     {
-        isDragging = true;
+        _isDragging = true;
         Time.timeScale = slowTimeScale;
     }
-
-    private void StopDragging()
+    public void StopDragging()
     {
-        isDragging = false;
+        _isDragging = false;
         Time.timeScale = 1.0f;
     }
 }

@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +9,7 @@ public class BgScroller : MonoBehaviour
 
     private void Update()
     {
+        // Move the texture offset by the scroll speed
         rawImage.uvRect = new Rect(rawImage.uvRect.position + new Vector2(scrollSpeedX, scrollSpeedY) * Time.deltaTime, rawImage.uvRect.size);
     }
 }

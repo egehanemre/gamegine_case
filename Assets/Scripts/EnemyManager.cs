@@ -1,6 +1,3 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
@@ -9,12 +6,12 @@ public class EnemyManager : MonoBehaviour
 
     private void Start()
     {
-        speed = UnityEngine.Random.Range(1.0f, 3.0f);
+        speed = Random.Range(1.0f, 3.0f);
     }
 
     void Update()
     {
-        transform.Translate(Vector2.right * speed * Time.deltaTime);
+        transform.Translate(Vector2.right * (speed * Time.deltaTime));
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -24,7 +21,7 @@ public class EnemyManager : MonoBehaviour
         {
             baseManager.healthManager.TakeDamage(10);
             Destroy(gameObject);
-            CoinCounter.instance.GetCoins(10);
+            CoinCounter.Instance.GetCoins(10);
         }
     }
 }

@@ -10,11 +10,9 @@ public class ShopButton : MonoBehaviour
     public GameObject allyPrefab;
     public int price;
     public TextMeshProUGUI priceText;
-    public GameObject[] buttons; // Array of buttons
 
     private Image shopIconSpriteRenderer;
     private GameObject currentAlly;
-
     private void Awake()
     {
         shopIconSpriteRenderer = transform.Find("ShopIconSprite").GetComponent<Image>();
@@ -35,7 +33,6 @@ public class ShopButton : MonoBehaviour
     {
         InitializeButtons();
     }
-
     private void InitializeButtons()
     {
         GetComponent<Button>().onClick.AddListener(() => StartDraggingAlly());
@@ -43,25 +40,25 @@ public class ShopButton : MonoBehaviour
 
     public void StartDraggingAlly()
     {
-        ShopButton shopButton = GetComponent<ShopButton>();
-        if (shopButton != null)
+        // Ensure any previous ally is no longer draggable
+        if (currentAlly != null && currentAlly.GetComponent<Draggable>() != null)
         {
-            // Spawn the selected ally prefab at the mouse position which is directly on buttons
-            Vector3 spawnPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            spawnPosition.z = 0; // Ensure the z position is 0
-
-            currentAlly = shopButton.InstantiateAlly(spawnPosition);
-
-            // Add Draggable component if not already present
-            if (currentAlly.GetComponent<Draggable>() == null)
-            {
-                currentAlly.AddComponent<Draggable>();
-            }
+            currentAlly.GetComponent<Draggable>().StopDragging();
         }
-        else
+
+        // Spawn the selected ally prefab at the mouse position which is directly on buttons
+        Vector3 spawnPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        spawnPosition.z = 0; // Ensure the z position is 0
+
+        currentAlly = InstantiateAlly(spawnPosition);
+
+        // Add Draggable component if not already present
+        Draggable draggableComponent = currentAlly.GetComponent<Draggable>();
+        if (draggableComponent == null)
         {
-            Debug.LogError("No ShopButton component found on button index: ");
+            draggableComponent = currentAlly.AddComponent<Draggable>();
         }
+        draggableComponent.isDraggable = true; // Ensure the new object is draggable
     }
 
     public GameObject InstantiateAlly(Vector3 position)
