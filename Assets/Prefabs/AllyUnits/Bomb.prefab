@@ -161,7 +161,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6adebf4e806eef04683a5f4c27b4885a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 500
+  damage: 200
   explosionRadius: 3
   enemyLayer:
     serializedVersion: 2
@@ -185,7 +185,7 @@ MonoBehaviour:
   cooldown: 0
   range: 0
   health: 0
-  cost: 50
+  cost: 500
   tile: {fileID: 0}
   shootMask:
     serializedVersion: 2

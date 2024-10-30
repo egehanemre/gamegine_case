@@ -520,10 +520,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: efb078c1c465b9e4797bd2738c2d7cb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isBomb: 0
   bulletPrefab: {fileID: 1632287803157448019, guid: bdd7884d18d80c949be1534446d9122d, type: 3}
   bulletSpawnPoint: {fileID: 3976398323739527406}
   cooldown: 3
-  range: 10
+  range: 11
   health: 250
   cost: 250
   tile: {fileID: 0}

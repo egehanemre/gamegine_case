@@ -651,15 +651,14 @@ MonoBehaviour:
   - {fileID: 1814071684}
   enemyPrefabs:
   - {fileID: 437414455571381098, guid: 548d249e124c99045998cf227cee7e8c, type: 3}
+  - {fileID: 437414455571381098, guid: c05d9b84c365409459383133dc955b78, type: 3}
   - {fileID: 437414455571381098, guid: be3f28bf6b066b74eb77dc042056fd90, type: 3}
   initialSpawnInterval: 2
   spawnIntervalRandomness: 0.5
   yOffsetRandomnessStart: 0.6
   yOffsetRandomnessEnd: 0.7
   initialMultiplier: 0
-  _currentSpawnInterval: 0
-  _enemiesToSpawn: 0
-  _enemiesSpawned: 0
+  enemyDifficulty: 1
 --- !u!4 &289528777
 Transform:
   m_ObjectHideFlags: 0
@@ -690,7 +689,6 @@ MonoBehaviour:
   initialEnemiesPerWave: 5
   timeBetweenWaves: 5
   spawnIntervalDecreaseRate: 0.1
-  _currentWave: 0
   spawnMultiplier: 1
   waveText: {fileID: 1073270381}
 --- !u!1001 &306289702
@@ -2970,7 +2968,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4575177624577045678, guid: 16846d57ccd80ab4da932d968fe2aed4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 1.019
+      value: -1.685
       objectReference: {fileID: 0}
     - target: {fileID: 4575177624577045678, guid: 16846d57ccd80ab4da932d968fe2aed4, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -5440,7 +5438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4575177624577045678, guid: 16846d57ccd80ab4da932d968fe2aed4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.6799927
+      value: 1.024
       objectReference: {fileID: 0}
     - target: {fileID: 4575177624577045678, guid: 16846d57ccd80ab4da932d968fe2aed4, type: 3}
       propertyPath: m_AnchoredPosition.y
