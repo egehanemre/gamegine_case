@@ -18,25 +18,18 @@ public class HealthManager : MonoBehaviour
     public void TakeDamage(float damage)
     {
         health -= damage;
-        if (health < 0)
+        if (health <= 0)
         {
             health = 0;
+            Die();
         }
         UpdateHealthBar();
     }
 
-    /*
-    public void Heal(int healAmount)
+    private void Die()
     {
-        health += healAmount;
-        if (health > maxHealth)
-        {
-            health = maxHealth;
-        }
-        UpdateHealthBar();
+        SceneManager.Instance.GameOver();
     }
-    */
-
     private void UpdateHealthBar()
     {
         healthBar.fillAmount = health / maxHealth;

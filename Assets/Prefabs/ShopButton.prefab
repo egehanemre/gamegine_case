@@ -447,6 +447,7 @@ GameObject:
   - component: {fileID: 3410899268820693516}
   - component: {fileID: 9178168528287458151}
   - component: {fileID: 107473834784781011}
+  - component: {fileID: 9114339300300999354}
   m_Layer: 5
   m_Name: ShopButton
   m_TagString: Untagged
@@ -505,7 +506,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 7482667652216324306, guid: 4864a61a3f1a6544a9a369b95330bc8d, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d93498af11b173a45a08545ad7fb36af, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -558,16 +559,21 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 9178168528287458151}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: ShopManager, Assembly-CSharp
-        m_MethodName: BuyItem
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
+--- !u!114 &9114339300300999354
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4753815708020782921}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee0aef94e395b9a4480cc7ced3891718, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  allySprite: {fileID: 0}
+  allyPrefab: {fileID: 0}
+  price: 0
+  priceText: {fileID: 0}
+  tiles: {fileID: 0}

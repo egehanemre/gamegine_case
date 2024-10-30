@@ -1,23 +1,22 @@
-using UnityEditor.U2D.Aseprite;
 using UnityEngine;
 
 public class Draggable : MonoBehaviour
 {
-    // Static variable to track if any object is currently being dragged
-    private static bool _isDragging;
-
-    // Public variables to control dragging behavior
     public bool isDraggable = true;
     public GameObject allyObject;
     public float slowTimeScale = 0.1f;
-
     public ShopButton shopButton;
-
+    private float _currentTimeScale;
+    
+    private CoinCounter _coinCounter;
     private Camera _mainCamera;
+
+    private static bool _isDragging;
 
     private void Start()
     {
         _mainCamera = Camera.main;
+        _coinCounter = FindObjectOfType<CoinCounter>();
     }
 
     private void OnEnable()
@@ -27,6 +26,7 @@ public class Draggable : MonoBehaviour
             StartDragging();
         }
     }
+
     private void OnMouseDown()
     {
         if (!_isDragging && isDraggable)
@@ -34,6 +34,7 @@ public class Draggable : MonoBehaviour
             StartDragging();
         }
     }
+
     private void OnMouseUp()
     {
         if (_isDragging)
@@ -41,43 +42,55 @@ public class Draggable : MonoBehaviour
             StopDragging();
         }
     }
+
     private void OnDestroy()
     {
         StopDragging();
     }
+
     private void Update()
+    {
+        ManageInput();
+    }
+
+    private void ManageInput()
     {
         if (_isDragging)
         {
-            // Cancel drag on right-click
-            if (Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1)) // Right click
             {
                 Destroy(gameObject);
                 StopDragging();
-                if (shopButton != null)
-                {
-                    shopButton.SetTileActivity(false);
-                }
+                shopButton?.SetTileActivity(false);
                 return;
             }
 
-            // Update object position to follow the mouse
             Vector2 mousePosition = _mainCamera.ScreenToWorldPoint(Input.mousePosition);
             transform.position = mousePosition;
 
-            // Place object on left-click
-            if (Input.GetMouseButtonDown(0))
+            if (Input.GetMouseButtonDown(0)) // Left click
             {
-                PlaceObject();
-                if (shopButton != null)
+                if (_coinCounter.coinCount >= shopButton.price)
                 {
-                    shopButton.SetTileActivity(false);
+                    PlaceObject(); 
+                    shopButton?.SetTileActivity(false); // Disable the tile
+                }
+                else
+                {
+                    Destroy(gameObject);
+                    StopDragging();
+                    shopButton?.SetTileActivity(false); // Disable the tile 
                 }
             }
         }
     }
 
-    // Method to place the object on a tile
+    public void StopDragging()
+    {
+        _isDragging = false;
+        Time.timeScale = _currentTimeScale; // Restore the time scale
+    }
+
     private void PlaceObject()
     {
         Collider2D hitCollider = Physics2D.OverlapPoint(transform.position);
@@ -86,28 +99,34 @@ public class Draggable : MonoBehaviour
             Tile tile = hitCollider.GetComponent<Tile>();
             if (tile != null && !tile.hasAlly)
             {
+                // Place the object on the tile
                 tile.hasAlly = true;
-                tile.spriteRenderer.sprite = null; // Remove the sprite from the tile
-                tile.allyObject = gameObject; // Set the ally object reference on the tile
+                tile.spriteRenderer.sprite = null;
+                tile.allyObject = gameObject;
+                
+                _coinCounter.SpendCoins(shopButton.price); // Spend coins
 
-                gameObject.transform.position = tile.transform.position; // Snap the draggable object to the tile
-                Destroy(gameObject.GetComponent<Draggable>()); // Remove the draggable component
+                Shooter shooter = gameObject.GetComponent<Shooter>();
+                shooter.tile = tile;
 
-                //TODO Manage money mechanics
+                gameObject.transform.position = tile.transform.position;
+                Destroy(gameObject.GetComponent<Draggable>());
 
+                BoxCollider2D boxCollider = gameObject.GetComponent<BoxCollider2D>();
+                if (boxCollider != null)
+                {
+                    boxCollider.enabled = true;
+                }
                 return;
             }
         }
-        Destroy(gameObject); // Destroy if not placed on a valid tile
+        Destroy(gameObject);
     }
+
     private void StartDragging()
     {
         _isDragging = true;
-        Time.timeScale = slowTimeScale;
-    }
-    public void StopDragging()
-    {
-        _isDragging = false;
-        Time.timeScale = 1.0f;
+        _currentTimeScale = Time.timeScale;
+        Time.timeScale = slowTimeScale; // Slow down the time while dragging
     }
 }

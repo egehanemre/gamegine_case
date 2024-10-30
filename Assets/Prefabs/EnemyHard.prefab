@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: -2833815301012904580}
   - component: {fileID: 1183213163749419323}
   m_Layer: 6
-  m_Name: Enemy
+  m_Name: EnemyHard
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: c742fbe5190278d439ffccc2e0a65e36, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.9622642, g: 0.14978641, b: 0.14978641, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,11 +99,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c2cd69568ff23f42a2c805e4cbbd530, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 0.2
-  enemyHealth: 100
+  speed: 0.1
+  enemyHealth: 250
   damageOverTime: 10
   damageInterval: 0.3
-  coinOnDeath: 25
+  coinOnDeath: 50
 --- !u!61 &-2833815301012904580
 BoxCollider2D:
   m_ObjectHideFlags: 0

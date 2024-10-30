@@ -17,6 +17,7 @@ public class ShopButton : MonoBehaviour
     public GameObject tiles;
     private void Awake()
     {
+        price = allyPrefab.GetComponent<Shooter>().cost;
         _shopIconSpriteRenderer = transform.Find("ShopIconSprite").GetComponent<Image>();
         _shopIconSpriteRenderer.sprite = allySprite;
         priceText.text = price.ToString();

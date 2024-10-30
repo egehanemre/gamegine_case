@@ -12,11 +12,4 @@ public class BaseManager : MonoBehaviour
             Debug.LogError("HealthManager component not found in child objects.");
         }
     }
-    void Update()
-    {
-        if (healthManager != null)
-        {
-            //TODO Implement base destruction logic
-        }
-    }
 }
